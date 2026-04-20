@@ -13,5 +13,17 @@ int main()
 
     DataSet ds(filename);
 
-    cout << "The median of the dataset is " << median(ds) << endl;
+    // Median and Bubble Sort
+
+    ds.bubbleSort();
+
+    cout << "Median: " << median(ds) << endl;
+
+    // Mean
+    cout << "Mean: " << mean(ds) << endl;
+
+    // Mode
+    cout << "Mode: " << mode(ds) << endl;
+
+    return 0;
 }

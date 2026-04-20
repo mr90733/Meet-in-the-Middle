@@ -4,21 +4,16 @@
 
 #include <fstream>
 
-#include <sstream>
-
 #include <string>
-
-#include <cmath>
 
 using namespace std;
 
 class DataSet
 
 {
-
 private:
 
-    int* data;
+    int *data;
 
     size_t size;
 
@@ -26,31 +21,24 @@ private:
 
 public:
 
-    explicit DataSet(const string& filename) : data(nullptr), size(0), med(0.0)
+    explicit DataSet(const string &filename);
 
-    {
-        ifstream file(filename);
 
-        if (!file) { cerr << "Not valid\n"; return; }
+    ~DataSet();
 
-        string line; getline(file, line);
+    // Median
 
-        stringstream ss(line); string token;
+    friend double median(const DataSet &ds);
 
-        while (getline(ss, token, ',')) size++;
+    // Mean
 
-        data = new int[size];
+    friend double mean(const DataSet &ds);
 
-        ss.clear(); ss.str(line);
+    // Mode
 
-        for (size_t i = 0; i < size; ++i) { getline(ss, token, ','); data[i] = stoi(token); }
+    friend int mode(const DataSet &ds);
 
-        if (size % 2 == 1) med = data[size/2];
-
-        else med = (data[size/2 -1] + data[size/2]) / 2.0;
-    }
-
-    ~DataSet() { delete[] data; }
-
-    friend double median(const DataSet& ds) { return ds.med; }
+    //
+    // Bubble Sort
+    void bubbleSort();
 };
